@@ -33,7 +33,7 @@ export default function Home() {
     <div className="flex flex-col lg:flex-row h-screen p-4 space-y-4 lg:space-y-0 lg:space-x-4">
       <div className="h-[calc(50vh-2rem)] lg:h-auto lg:flex-1 border border-gray-700 rounded">
         <textarea
-          className="w-full h-full p-2 rounded bg-transparent text-gray-100 placeholder-gray-400 caret-yellow-500"
+          className="w-full h-full p-2 rounded bg-transparent text-gray-100 placeholder-gray-400 caret-yellow-500 resize-none"
           value={inputJson}
           onChange={(e) => setInputJson(e.target.value)}
           placeholder="Enter stringified JSON here"
