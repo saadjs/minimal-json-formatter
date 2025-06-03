@@ -7,7 +7,7 @@ import {
 	ChangeEvent,
 	ClipboardEvent,
 } from 'react';
-import Header from './Header';
+import Header from './header';
 import StatusBar from './status-bar';
 import InputPanel from './input-panel';
 import ControlPanel from './control-panel';
