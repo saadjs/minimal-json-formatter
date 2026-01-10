@@ -51,9 +51,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jetbrainsMono.variable} ${firaCode.variable} ${sourceCodePro.variable} ${ibmPlexMono.variable} ${robotoMono.variable} ${workSans.variable} antialiased`}>
+      <body className={`${jetbrainsMono.variable} ${firaCode.variable} ${sourceCodePro.variable} ${ibmPlexMono.variable} ${robotoMono.variable} ${workSans.variable} antialiased h-screen flex flex-col overflow-hidden`}>
         <Navbar />
-        <main>{children}</main>
+        <main className="flex-1 min-h-0 flex flex-col">{children}</main>
       </body>
     </html>
   );

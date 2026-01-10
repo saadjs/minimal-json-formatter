@@ -225,7 +225,7 @@ export default function JsonFormatter() {
 	}, [formatJson, clearAll]);
 
 	return (
-		<div className="flex flex-col h-screen relative overflow-hidden" style={{ background: 'var(--void-black)' }}>
+		<div className="flex flex-col flex-1 relative overflow-hidden" style={{ background: 'var(--void-black)' }}>
 			{/* Grid Background */}
 			<div className="absolute inset-0 grid-bg pointer-events-none" />
 

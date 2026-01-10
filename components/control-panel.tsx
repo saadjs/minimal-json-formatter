@@ -18,9 +18,9 @@ export default function ControlPanel({
 	onCopy,
 }: ControlPanelProps) {
 	return (
-		<div className="flex flex-row lg:flex-col lg:w-56 gap-4 animate-slide-in-left delay-100">
+		<div className="flex flex-row lg:flex-col lg:w-48 gap-3 animate-slide-in-left delay-100 lg:justify-center">
 			<button
-				className={`btn-brutal flex-1 lg:w-full px-6 py-4 text-xs tracking-wider ${
+				className={`btn-brutal flex-1 lg:flex-none lg:w-full px-4 py-3 text-xs tracking-wider ${
 					isFormatting ? 'cursor-not-allowed opacity-75' : ''
 				}`}
 				onClick={onFormat}
@@ -62,7 +62,7 @@ export default function ControlPanel({
 			</button>
 
 			<button
-				className="btn-brutal flex-1 lg:w-full px-6 py-4 text-xs tracking-wider"
+				className="btn-brutal flex-1 lg:flex-none lg:w-full px-4 py-3 text-xs tracking-wider"
 				onClick={onMinify}
 				style={{
 					background: 'var(--hot-pink)',
@@ -75,7 +75,7 @@ export default function ControlPanel({
 			</button>
 
 			<button
-				className="btn-brutal flex-1 lg:w-full px-6 py-4 text-xs tracking-wider"
+				className="btn-brutal flex-1 lg:flex-none lg:w-full px-4 py-3 text-xs tracking-wider"
 				onClick={onClear}
 				style={{
 					background: 'var(--void-black)',
@@ -88,7 +88,7 @@ export default function ControlPanel({
 			</button>
 
 			<button
-				className={`btn-brutal flex-1 lg:w-full px-6 py-4 text-xs tracking-wider ${
+				className={`btn-brutal flex-1 lg:flex-none lg:w-full px-4 py-3 text-xs tracking-wider ${
 					!outputJson || copyButtonText.includes('failed')
 						? 'cursor-not-allowed opacity-50'
 						: ''

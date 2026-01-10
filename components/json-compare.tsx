@@ -351,7 +351,7 @@ export default function JsonCompare() {
 
 	return (
 		<div
-			className="h-screen flex flex-col overflow-hidden"
+			className="flex-1 flex flex-col overflow-hidden"
 			style={{ background: 'var(--bg-primary)' }}
 		>
 			{/* Background effects */}
@@ -500,7 +500,7 @@ export default function JsonCompare() {
 			<div className="flex-1 flex overflow-hidden relative z-10">
 				{/* Left panel */}
 				<div
-					className="flex-1 flex flex-col min-w-0"
+					className="flex-1 flex flex-col min-w-0 min-h-0"
 					style={{ borderRight: '2px solid var(--steel-gray)' }}
 				>
 					{/* Panel header */}
@@ -644,7 +644,7 @@ export default function JsonCompare() {
 				</div>
 
 				{/* Right panel */}
-				<div className="flex-1 flex flex-col min-w-0">
+				<div className="flex-1 flex flex-col min-w-0 min-h-0">
 					{/* Panel header */}
 					<div
 						className="flex items-center justify-between px-4 py-2"
