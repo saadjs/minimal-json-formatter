@@ -27,22 +27,46 @@ export default function InputPanel({
 	fontSize,
 }: InputPanelProps) {
 	return (
-		<div className="flex-1 flex flex-col min-h-0">
-			<div className="flex items-center justify-between mb-2">
-				<h2 className="text-lg font-semibold text-white">Input JSON</h2>
-				<div className="text-sm text-gray-400">Paste JSON here</div>
+		<div className="flex-1 flex flex-col min-h-0 animate-slide-in-left delay-200">
+			<div className="flex items-center justify-between mb-3">
+				<h2
+					className="text-lg font-black uppercase tracking-wide"
+					style={{
+						color: 'var(--stark-white)',
+						fontFamily: 'var(--font-work-sans)'
+					}}
+				>
+					<span style={{ color: 'var(--electric-cyan)' }}>▸</span> INPUT
+				</h2>
+				<div
+					className="text-xs uppercase font-bold tracking-wide"
+					style={{
+						color: 'var(--steel-gray)',
+						fontFamily: 'var(--font-work-sans)'
+					}}
+				>
+					PASTE JSON
+				</div>
 			</div>
-			<div className="flex-1 border border-gray-600 rounded-lg overflow-hidden bg-gray-800 shadow-lg">
+			<div
+				className="flex-1 overflow-hidden relative"
+				style={{
+					border: '4px solid var(--electric-cyan)',
+					background: 'var(--deep-black)'
+				}}
+			>
 				<textarea
 					style={{
 						fontFamily: getFontVariable(fontFamily),
 						fontSize: `${fontSize}px`,
+						background: 'var(--deep-black)',
+						color: 'var(--stark-white)'
 					}}
-					className="w-full h-full p-4 bg-transparent text-gray-100 placeholder-gray-500 resize-none leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset overflow-auto"
+					className="w-full h-full p-6 resize-none leading-relaxed focus:outline-none overflow-auto"
 					value={value}
 					onChange={onChange}
 					onPaste={onPaste}
-					placeholder='Enter or paste JSON here...\n\nExample:\n{\n  "name": "John",\n  "age": 30,\n  "city": "New York"\n}'
+					placeholder='{"action": "PASTE_JSON_HERE"}'
 					spellCheck={false}
 				/>
 			</div>

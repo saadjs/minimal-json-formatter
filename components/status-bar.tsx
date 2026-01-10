@@ -10,26 +10,49 @@ export default function StatusBar({
 	error,
 }: StatusBarProps) {
 	return (
-		<div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700 text-sm">
-			<div className="flex items-center space-x-4">
-				<span className="text-gray-400">
-					Characters: {characterCount}
-				</span>
-				<div className="flex items-center space-x-2">
+		<div
+			className="relative z-20 flex items-center justify-between px-6 py-3 border-b-2 text-xs font-bold uppercase tracking-wide"
+			style={{
+				background: 'var(--coal-black)',
+				borderColor: 'var(--steel-gray)',
+				fontFamily: 'var(--font-work-sans)'
+			}}
+		>
+			<div className="flex items-center gap-6">
+				<div className="flex items-center gap-2">
+					<span style={{ color: 'var(--steel-gray)' }}>CHARS:</span>
+					<span style={{ color: 'var(--electric-cyan)' }}>{characterCount.toLocaleString()}</span>
+				</div>
+				<div className="flex items-center gap-2">
 					<div
-						className={`w-2 h-2 rounded-full ${
-							isValid ? 'bg-green-500' : 'bg-red-500'
+						className={`w-3 h-3 border-2 rounded-full ${
+							isValid ? 'pulse-border' : ''
 						}`}
+						style={{
+							borderColor: isValid ? 'var(--lime-punch)' : 'var(--hot-pink)',
+							background: isValid ? 'var(--lime-punch)' : 'var(--hot-pink)',
+							boxShadow: isValid
+								? '0 0 10px var(--lime-punch)'
+								: '0 0 10px var(--hot-pink)'
+						}}
 					/>
 					<span
-						className={isValid ? 'text-green-400' : 'text-red-400'}
+						style={{
+							color: isValid ? 'var(--lime-punch)' : 'var(--hot-pink)'
+						}}
 					>
-						{isValid ? 'Valid JSON' : 'Invalid JSON'}
+						{isValid ? '✓ VALID' : '✗ INVALID'}
 					</span>
 				</div>
 			</div>
 			{error && (
-				<div className="text-red-400 max-w-md truncate">⚠️ {error}</div>
+				<div
+					className="flex items-center gap-2 max-w-md truncate"
+					style={{ color: 'var(--hot-pink)' }}
+				>
+					<span className="text-base">⚠</span>
+					<span className="font-mono text-xs normal-case">{error}</span>
+				</div>
 			)}
 		</div>
 	);

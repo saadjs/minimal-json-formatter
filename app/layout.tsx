@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Fira_Code, Source_Code_Pro, IBM_Plex_Mono, Roboto_Mono } from "next/font/google";
+import { JetBrains_Mono, Fira_Code, Source_Code_Pro, IBM_Plex_Mono, Roboto_Mono, Work_Sans } from "next/font/google";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -32,6 +32,12 @@ const robotoMono = Roboto_Mono({
   weight: ['400', '500', '600'],
 });
 
+const workSans = Work_Sans({
+  subsets: ['latin'],
+  variable: '--font-work-sans',
+  weight: ['400', '600', '800', '900'],
+});
+
 export const metadata: Metadata = {
   title: "JSON Formatter",
   description: "Minimal JSON Formatter",
@@ -44,7 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jetbrainsMono.variable} ${firaCode.variable} ${sourceCodePro.variable} ${ibmPlexMono.variable} ${robotoMono.variable} antialiased`}>
+      <body className={`${jetbrainsMono.variable} ${firaCode.variable} ${sourceCodePro.variable} ${ibmPlexMono.variable} ${robotoMono.variable} ${workSans.variable} antialiased`}>
         <main>{children}</main>
       </body>
     </html>

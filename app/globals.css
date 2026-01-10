@@ -3,31 +3,300 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Grid & Effects */
+  --grid-size: 20px;
+  --border-thicc: 4px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark Mode (Default) */
+[data-theme='dark'] {
+  --void-black: #000000;
+  --deep-black: #0a0a0a;
+  --coal-black: #141414;
+  --electric-cyan: #00ffff;
+  --hot-pink: #ff006e;
+  --lime-punch: #00ff00;
+  --neon-yellow: #ffff00;
+  --stark-white: #ffffff;
+  --steel-gray: #404040;
+
+  /* Semantic colors */
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #141414;
+  --text-primary: #ffffff;
+  --text-secondary: #404040;
+  --accent-primary: #00ffff;
+  --accent-secondary: #ff006e;
+  --accent-tertiary: #00ff00;
+  --accent-quaternary: #ffff00;
+  --grid-color: #404040;
+}
+
+/* Light Mode */
+[data-theme='light'] {
+  --void-black: #ffffff;
+  --deep-black: #f5f5f5;
+  --coal-black: #e8e8e8;
+  --electric-cyan: #0066ff;
+  --hot-pink: #ff0066;
+  --lime-punch: #00cc00;
+  --neon-yellow: #ff9900;
+  --stark-white: #000000;
+  --steel-gray: #888888;
+
+  /* Semantic colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e8e8e8;
+  --text-primary: #000000;
+  --text-secondary: #888888;
+  --accent-primary: #0066ff;
+  --accent-secondary: #ff0066;
+  --accent-tertiary: #00cc00;
+  --accent-quaternary: #ff9900;
+  --grid-color: #cccccc;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--stark-white);
+  background: var(--void-black);
+  font-family: var(--font-work-sans), system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* Grid Background Effect */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-position: -1px -1px;
+  opacity: 0.15;
+}
+
+/* Scanline Effect */
+[data-theme='dark'] .scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.3) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+  animation: scanline 8s linear infinite;
+}
+
+[data-theme='light'] .scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.05) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+/* Glitch Animation */
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+.glitch:hover {
+  animation: glitch 0.3s ease-in-out;
+}
+
+/* Pulse Glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+.pulse-border {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Slide-in Animations */
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-top {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-slide-in-top {
+  animation: slide-in-top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stagger delays for sequential animations */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+/* Terminal Text Effect */
+@keyframes terminal-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.terminal-cursor::after {
+  content: '▊';
+  animation: terminal-blink 1s infinite;
+  margin-left: 2px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border: 2px solid var(--text-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border: 2px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+textarea::selection,
+pre::selection {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+/* Placeholder */
+textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* Neo-Brutalist Button Base */
+.btn-brutal {
+  position: relative;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: var(--border-thicc) solid;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 6px 6px 0 var(--void-black);
+}
+
+.btn-brutal:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--void-black);
+}
+
+.btn-brutal:active {
+  transform: translate(6px, 6px);
+  box-shadow: 0 0 0 var(--void-black);
+}
+
+/* Thick Border Utility */
+.border-brutal {
+  border: var(--border-thicc) solid;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-}
-
-textarea::selection,
-pre::selection {
-  background-color: yellow;
-  color: black;
 }

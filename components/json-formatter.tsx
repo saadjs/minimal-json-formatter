@@ -34,6 +34,12 @@ export default function JsonFormatter() {
 		}
 		return '14';
 	});
+	const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+		if (typeof window !== 'undefined') {
+			return (localStorage.getItem('json-formatter-theme') as 'dark' | 'light') || 'dark';
+		}
+		return 'dark';
+	});
 
 	// Validation effect
 	useEffect(() => {
@@ -186,6 +192,21 @@ export default function JsonFormatter() {
 		}
 	};
 
+	const toggleTheme = () => {
+		const newTheme = theme === 'dark' ? 'light' : 'dark';
+		setTheme(newTheme);
+		if (typeof window !== 'undefined') {
+			localStorage.setItem('json-formatter-theme', newTheme);
+		}
+	};
+
+	// Apply theme to document
+	useEffect(() => {
+		if (typeof document !== 'undefined') {
+			document.documentElement.setAttribute('data-theme', theme);
+		}
+	}, [theme]);
+
 	// Keyboard shortcuts
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
@@ -204,7 +225,13 @@ export default function JsonFormatter() {
 	}, [formatJson, clearAll]);
 
 	return (
-		<div className="flex flex-col h-screen bg-gray-900">
+		<div className="flex flex-col h-screen relative overflow-hidden" style={{ background: 'var(--void-black)' }}>
+			{/* Grid Background */}
+			<div className="absolute inset-0 grid-bg pointer-events-none" />
+
+			{/* Scanlines */}
+			<div className="scanlines absolute inset-0 pointer-events-none" />
+
 			<Header
 				indentSize={indentSize}
 				onIndentChange={handleIndentChange}
@@ -212,6 +239,8 @@ export default function JsonFormatter() {
 				onFontChange={handleFontChange}
 				fontSize={fontSize}
 				onFontSizeChange={handleFontSizeChange}
+				theme={theme}
+				onToggleTheme={toggleTheme}
 			/>
 
 			<StatusBar
@@ -220,7 +249,7 @@ export default function JsonFormatter() {
 				error={error}
 			/>
 
-			<div className="flex flex-col lg:flex-row flex-1 p-4 space-y-4 lg:space-y-0 lg:space-x-4 min-h-0">
+			<div className="flex flex-col lg:flex-row flex-1 p-6 gap-6 min-h-0 relative z-10">
 				<InputPanel
 					value={inputJson}
 					onChange={handleInputChange}

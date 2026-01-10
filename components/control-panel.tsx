@@ -18,20 +18,24 @@ export default function ControlPanel({
 	onCopy,
 }: ControlPanelProps) {
 	return (
-		<div className="flex flex-row lg:flex-col lg:w-48 space-x-2 lg:space-x-0 lg:space-y-3">
+		<div className="flex flex-row lg:flex-col lg:w-56 gap-4 animate-slide-in-left delay-100">
 			<button
-				className={`flex-1 lg:w-full px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
-					isFormatting
-						? 'bg-blue-400 cursor-not-allowed'
-						: 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800'
-				} text-white shadow-lg`}
+				className={`btn-brutal flex-1 lg:w-full px-6 py-4 text-xs tracking-wider ${
+					isFormatting ? 'cursor-not-allowed opacity-75' : ''
+				}`}
 				onClick={onFormat}
 				disabled={isFormatting}
+				style={{
+					background: 'var(--electric-cyan)',
+					borderColor: 'var(--stark-white)',
+					color: 'var(--void-black)',
+					fontFamily: 'var(--font-work-sans)'
+				}}
 			>
 				{isFormatting ? (
-					<span className="flex items-center justify-center">
+					<span className="flex items-center justify-center gap-2">
 						<svg
-							className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+							className="animate-spin h-4 w-4"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
@@ -50,37 +54,59 @@ export default function ControlPanel({
 								d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 							/>
 						</svg>
-						Formatting...
+						FORMATTING...
 					</span>
 				) : (
-					'Format JSON'
+					'▶ FORMAT'
 				)}
 			</button>
 
 			<button
-				className="flex-1 lg:w-full px-4 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 active:bg-purple-800 font-medium transition-all duration-200 shadow-lg"
+				className="btn-brutal flex-1 lg:w-full px-6 py-4 text-xs tracking-wider"
 				onClick={onMinify}
+				style={{
+					background: 'var(--hot-pink)',
+					borderColor: 'var(--stark-white)',
+					color: 'var(--stark-white)',
+					fontFamily: 'var(--font-work-sans)'
+				}}
 			>
-				Minify JSON
+				⚡ MINIFY
 			</button>
 
 			<button
-				className="flex-1 lg:w-full px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 font-medium transition-all duration-200 shadow-lg"
+				className="btn-brutal flex-1 lg:w-full px-6 py-4 text-xs tracking-wider"
 				onClick={onClear}
+				style={{
+					background: 'var(--void-black)',
+					borderColor: 'var(--hot-pink)',
+					color: 'var(--hot-pink)',
+					fontFamily: 'var(--font-work-sans)'
+				}}
 			>
-				Clear All
+				✕ CLEAR
 			</button>
 
 			<button
-				className={`flex-1 lg:w-full px-4 py-3 rounded-lg font-medium transition-all duration-200 shadow-lg ${
-					copyButtonText.includes('Copied')
-						? 'bg-green-600 text-white'
-						: 'bg-green-600 hover:bg-green-700 active:bg-green-800 text-white'
+				className={`btn-brutal flex-1 lg:w-full px-6 py-4 text-xs tracking-wider ${
+					!outputJson || copyButtonText.includes('failed')
+						? 'cursor-not-allowed opacity-50'
+						: ''
 				}`}
 				onClick={onCopy}
 				disabled={!outputJson || copyButtonText.includes('failed')}
+				style={{
+					background: copyButtonText.includes('Copied')
+						? 'var(--lime-punch)'
+						: 'var(--neon-yellow)',
+					borderColor: 'var(--void-black)',
+					color: 'var(--void-black)',
+					fontFamily: 'var(--font-work-sans)'
+				}}
 			>
-				{copyButtonText}
+				{copyButtonText.includes('Copied')
+					? '✓ COPIED!'
+					: '◎ COPY'}
 			</button>
 		</div>
 	);
