@@ -12,6 +12,13 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        'jetbrains': ['var(--font-jetbrains-mono)', 'monospace'],
+        'fira': ['var(--font-fira-code)', 'monospace'],
+        'source': ['var(--font-source-code-pro)', 'monospace'],
+        'ibm': ['var(--font-ibm-plex-mono)', 'monospace'],
+        'roboto': ['var(--font-roboto-mono)', 'monospace'],
+      },
     },
   },
   plugins: [],

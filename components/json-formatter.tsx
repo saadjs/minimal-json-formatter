@@ -22,6 +22,18 @@ export default function JsonFormatter() {
 	const [isValid, setIsValid] = useState(true);
 	const [characterCount, setCharacterCount] = useState(0);
 	const [indentSize, setIndentSize] = useState(2);
+	const [fontFamily, setFontFamily] = useState(() => {
+		if (typeof window !== 'undefined') {
+			return localStorage.getItem('json-formatter-font') || 'jetbrains';
+		}
+		return 'jetbrains';
+	});
+	const [fontSize, setFontSize] = useState(() => {
+		if (typeof window !== 'undefined') {
+			return localStorage.getItem('json-formatter-font-size') || '14';
+		}
+		return '14';
+	});
 
 	// Validation effect
 	useEffect(() => {
