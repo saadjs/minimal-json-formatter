@@ -66,6 +66,19 @@ export default function JsonFormatter() {
 		}
 	}, [inputJson]);
 
+	// Reformat output when indent size changes
+	useEffect(() => {
+		if (outputJson && inputJson.trim()) {
+			try {
+				const parsed = JSON.parse(inputJson);
+				setOutputJson(JSON.stringify(parsed, null, indentSize));
+			} catch {
+				// If parsing fails, keep the existing output
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [indentSize]);
+
 	const formatJson = useCallback(async () => {
 		if (!inputJson.trim()) {
 			setError('Enter some JSON to format ‼️');
@@ -159,6 +172,20 @@ export default function JsonFormatter() {
 		setIndentSize(size);
 	};
 
+	const handleFontChange = (font: string) => {
+		setFontFamily(font);
+		if (typeof window !== 'undefined') {
+			localStorage.setItem('json-formatter-font', font);
+		}
+	};
+
+	const handleFontSizeChange = (size: string) => {
+		setFontSize(size);
+		if (typeof window !== 'undefined') {
+			localStorage.setItem('json-formatter-font-size', size);
+		}
+	};
+
 	// Keyboard shortcuts
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
@@ -181,6 +208,10 @@ export default function JsonFormatter() {
 			<Header
 				indentSize={indentSize}
 				onIndentChange={handleIndentChange}
+				fontFamily={fontFamily}
+				onFontChange={handleFontChange}
+				fontSize={fontSize}
+				onFontSizeChange={handleFontSizeChange}
 			/>
 
 			<StatusBar
@@ -194,6 +225,8 @@ export default function JsonFormatter() {
 					value={inputJson}
 					onChange={handleInputChange}
 					onPaste={handlePaste}
+					fontFamily={fontFamily}
+					fontSize={fontSize}
 				/>
 
 				<ControlPanel
@@ -206,7 +239,7 @@ export default function JsonFormatter() {
 					onCopy={copyOutput}
 				/>
 
-				<OutputPanel outputJson={outputJson} />
+				<OutputPanel outputJson={outputJson} fontFamily={fontFamily} fontSize={fontSize} />
 			</div>
 		</div>
 	);
