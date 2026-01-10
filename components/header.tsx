@@ -8,7 +8,7 @@ interface HeaderProps {
 	fontSize: string;
 	onFontSizeChange: (size: string) => void;
 	theme: 'dark' | 'light';
-	onToggleTheme: () => void;
+	onToggleTheme: () => unknown;
 }
 
 export default function Header({
