@@ -31,6 +31,15 @@
   --accent-tertiary: #00ff00;
   --accent-quaternary: #ffff00;
   --grid-color: #404040;
+
+  /* Diff colors */
+  --diff-added: #00ff00;
+  --diff-removed: #ff006e;
+  --diff-modified: #ffff00;
+  --diff-unchanged: #404040;
+  --diff-bg-added: rgba(0, 255, 0, 0.1);
+  --diff-bg-removed: rgba(255, 0, 110, 0.1);
+  --diff-bg-modified: rgba(255, 255, 0, 0.1);
 }
 
 /* Light Mode */
@@ -56,6 +65,15 @@
   --accent-tertiary: #00cc00;
   --accent-quaternary: #ff9900;
   --grid-color: #cccccc;
+
+  /* Diff colors */
+  --diff-added: #00cc00;
+  --diff-removed: #ff0066;
+  --diff-modified: #ff9900;
+  --diff-unchanged: #888888;
+  --diff-bg-added: rgba(0, 204, 0, 0.15);
+  --diff-bg-removed: rgba(255, 0, 102, 0.15);
+  --diff-bg-modified: rgba(255, 153, 0, 0.15);
 }
 
 body {
