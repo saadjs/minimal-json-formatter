@@ -64,7 +64,7 @@ export default function OutputPanel({ outputJson, fontFamily, fontSize }: Output
 								fontFamily: 'var(--font-work-sans)'
 							}}
 						>
-							// FORMATTED OUTPUT APPEARS HERE
+							{'// FORMATTED OUTPUT APPEARS HERE'}
 						</span>
 					)}
 				</pre>
